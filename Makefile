@@ -1,23 +1,19 @@
-
-
-NAME	= libftsolong.a
-
-SRC = 
-
-OBJS = $(SRC:.c=.o)
-CC = cc
+NAME = so_long
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
+
+SRC = main.c map_load.c map_free.c
+OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 clean:
-	rm -f $(OBJS)
+	rm -f $(OBJ)
 
 fclean: clean
 	rm -f $(NAME)
-re: fclean all
 
-.PHONY: all clean fclean re
+re: fclean all
