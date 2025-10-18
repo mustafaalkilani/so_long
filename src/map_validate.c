@@ -35,6 +35,31 @@ int	validate_rectangle(char **map)
 	}
 	return (1);
 }
+int	validate_wall(char **map)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+	len = ft_strlen(map[0]);
+	if (!map || !map[0])
+		return (0);
+	while(map[i][0] != '\n')
+	{
+		if (map[i][0] == 1)
+			i++;
+		else
+			return (0);
+	}
+	i = 0;
+	while(map[i][len])
+	{
+		if (map[i][len] == 1)
+			i++;
+		else
+			return (0);
+	}
+}
 int validate_map(char **map)
 {
     if (!validate_rectangle(map))
