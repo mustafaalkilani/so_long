@@ -1,5 +1,5 @@
-#include "so_long.h"
-#include "./get_next_line/get_next_line.h"
+#include "../include/so_long.h"
+#include "../get_next_line/get_next_line.h"
 
 char	**load_map(const char *filename)
 {

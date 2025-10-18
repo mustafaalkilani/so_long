@@ -2,7 +2,8 @@ NAME = so_long
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SRC = main.c map_load.c map_free.c
+GNL_SRC = get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
+SRC = main.c src/map_load.c src/map_free.c $(GNL_SRC) 		
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

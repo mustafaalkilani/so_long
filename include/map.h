@@ -3,5 +3,5 @@
 
 char	**load_map(const char *filename);
 void	free_map(char **map);
-
+int validate_map(char **map);
 #endif
