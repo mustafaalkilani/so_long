@@ -2,7 +2,7 @@
 
 void	free_map(char **map)
 {
-	int i;
+	int	i;
 
     i = 0;
 	if (!map)

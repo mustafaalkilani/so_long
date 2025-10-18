@@ -1,5 +1,6 @@
 #include "../include/so_long.h"
 #include "../get_next_line/get_next_line.h"
+#include "../include/map.h"
 
 char	**load_map(const char *filename)
 {
@@ -14,7 +15,6 @@ char	**load_map(const char *filename)
 		perror("Error opening map");
 		return (NULL);
 	}
-
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		map = realloc(map, sizeof(char *) * (lines + 2));
@@ -22,5 +22,8 @@ char	**load_map(const char *filename)
 		map[lines] = NULL;
 	}
 	close(fd);
-	return (map);
+	if (validate_map(map))
+		return (map);
+	else
+		return (NULL);
 }

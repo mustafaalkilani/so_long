@@ -11,8 +11,6 @@ int	error(char *msg, char **map)
 		free_map(map);
 	return (0);
 }
-
-
 int	validate_rectangle(char **map)
 {
 	int	width;
@@ -28,7 +26,7 @@ int	validate_rectangle(char **map)
 	y = 1;
 	while (map[y])
 	{
-		int	len = strlen(map[y]);
+		int	len = ft_strlen(map[y]);
 		if (map[y][len - 1] == '\n')
 			len--;
 		if (len != width)
@@ -40,5 +38,8 @@ int	validate_rectangle(char **map)
 int validate_map(char **map)
 {
     if (!validate_rectangle(map))
+	{
         return (error(ERR_RECT, map));
+	}
+	return(1);
 }
