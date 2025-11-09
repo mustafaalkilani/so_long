@@ -25,5 +25,6 @@ char	**load_map(const char *filename)
 	if (validate_map(map))
 		return (map);
 	else
-		return (NULL);
+		free_map(map);
+	return (NULL);
 }
