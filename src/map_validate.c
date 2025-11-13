@@ -1,17 +1,28 @@
-#include "../include/map.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_validate.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malkilan <malkilan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/13 17:03:39 by malkilan          #+#    #+#             */
+/*   Updated: 2025/11/13 19:50:49 by malkilan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../ft_printf/ft_printf.h"
 #include "../include/error.h"
+#include "../include/map.h"
 #include "../include/so_long.h"
 #include "../libft/libft.h"
-#include "../ft_printf/ft_printf.h"
 
-int	error(char *msg, char **map)
+static int	error(char *msg)
 {
 	ft_printf("%s", msg);
-	if (map)
-		free_map(map);
 	return (0);
 }
-int	validate_rectangle(char **map)
+
+static int	validate_rectangle(char **map) // dont forget to check for newline at the end of the file (do you consider it part of the map?)
 {
 	int	width;
 	int	y;
@@ -34,7 +45,8 @@ int	validate_rectangle(char **map)
 	}
 	return (1);
 }
-int	validate_wall(char **map)
+
+static int	validate_wall(char **map)
 {
 	int	i;
 	int	j;
@@ -49,12 +61,10 @@ int	validate_wall(char **map)
 	height = 0;
 	while (map[height])
 		height++;
-	// Check top and bottom walls
 	i = -1;
 	while (++i < width)
 		if (map[0][i] != '1' || map[height - 1][i] != '1')
 			return (0);
-	// Check left and right walls
 	j = 0;
 	while (++j < height - 1)
 		if (map[j][0] != '1' || map[j][width - 1] != '1')
@@ -62,40 +72,45 @@ int	validate_wall(char **map)
 	return (1);
 }
 
-int	validate_items(char **map)
+static int	validate_items(char **map)
 {
-    int i;
-    int j;
-    int counters[3];
+	int	i;
+	int	j;
+	int	counters[3];
 
-    if (!map || !map[0])
-		return (0);
-    counters[0] = 0; // player count
-    counters[1] = 0; // exit count
-    counters[2] = 0; // collectible count
-    i = -1;
-    while (map[++i])
-    {
-        j = -1;
-        while (map[i][++j])
-        {
-            if (map[i][j] == 'P')
-                counters[0]++;
-            else if (map[i][j] == 'E')
-                counters[1]++;
-            else if (map[i][j] == 'C')
-                counters[2]++;
-        }
-    }
-    return (counters[0] == 1 && counters[1] == 1 && counters[2] >= 1);
+	counters[0] = 0;
+	counters[1] = 0;
+	counters[2] = 0;
+	i = -1;
+	while (map[++i])
+	{
+		j = -1;
+		while (map[i][++j])
+		{
+			if (map[i][j] == 'P')
+				counters[0]++;
+			else if (map[i][j] == 'E')
+				counters[1]++;
+			else if (map[i][j] == 'C')
+				counters[2]++;
+			else if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != '\n')
+				return (0);
+		}
+	}
+	return (counters[0] == 1 && counters[1] == 1 && counters[2] >= 1);
 }
+
 int	validate_map(char **map)
 {
+	if (!map)
+		return (error("Error: empty map file\n"));
 	if (!validate_rectangle(map))
-		return (error(ERR_RECT, map));
+		return (error(ERR_RECT));
 	if (!validate_wall(map))
-		return (error(ERR_WALLS, map));
+		return (error(ERR_WALLS));
 	if (!validate_items(map))
-		return (error(ERR_ITEMS, map));
+		return (error(ERR_ITEMS));
+	if (!validate_path(map))
+		return (error(ERR_PATH));
 	return (1);
 }
