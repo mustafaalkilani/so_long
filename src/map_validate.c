@@ -22,7 +22,7 @@ static int	error(char *msg)
 	return (0);
 }
 
-static int	validate_rectangle(char **map) // dont forget to check for newline at the end of the file (do you consider it part of the map?)
+static int	validate_rectangle(char **map)
 {
 	int	width;
 	int	y;
@@ -103,7 +103,7 @@ static int	validate_items(char **map)
 int	validate_map(char **map)
 {
 	if (!map)
-		return (error("Error: empty map file\n"));
+		return (error(ERR_EMPTY));
 	if (!validate_rectangle(map))
 		return (error(ERR_RECT));
 	if (!validate_wall(map))

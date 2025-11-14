@@ -31,8 +31,8 @@ int	check_extension(const char *filename)
 
 int	main(int argc, char **argv)
 {
-	char **map;
-	t_game game;
+	char	**map;
+	t_game	game;
 
 	if (argc != 2)
 	{

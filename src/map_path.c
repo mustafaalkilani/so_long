@@ -13,7 +13,6 @@
 #include "../include/map.h"
 #include "../include/so_long.h"
 #include "../libft/libft.h"
-#include <stdlib.h>
 
 static void	find_player(char **map, int *x, int *y)
 {

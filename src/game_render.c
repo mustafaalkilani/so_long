@@ -19,16 +19,16 @@ static void	render_tile(t_game *game, char tile, int x, int y)
 		* TILE_SIZE, y * TILE_SIZE);
 	if (tile == '1')
 		mlx_put_image_to_window(game->mlx, game->win, game->wall.img, x
-		* TILE_SIZE, y * TILE_SIZE);
+			* TILE_SIZE, y * TILE_SIZE);
 	else if (tile == 'P')
 		mlx_put_image_to_window(game->mlx, game->win, game->player.img, x
-		* TILE_SIZE, y * TILE_SIZE);
+			* TILE_SIZE, y * TILE_SIZE);
 	else if (tile == 'C')
 		mlx_put_image_to_window(game->mlx, game->win, game->collectible.img, x
-		* TILE_SIZE, y * TILE_SIZE);
+			* TILE_SIZE, y * TILE_SIZE);
 	else if (tile == 'E')
 		mlx_put_image_to_window(game->mlx, game->win, game->exit.img, x
-		* TILE_SIZE, y * TILE_SIZE);
+			* TILE_SIZE, y * TILE_SIZE);
 }
 
 void	render_map(t_game *game)

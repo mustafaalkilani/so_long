@@ -46,22 +46,24 @@ static char	**resize_map(char **map, int lines)
 
 char	**load_map(const char *filename)
 {
-	int	fd;
+	int		fd;
 	char	**map;
 	char	*line;
-	int	lines;
+	int		lines;
 
 	map = NULL;
 	lines = 0;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (perror(PERROR), NULL);
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		map = resize_map(map, lines);
 		if (!map)
 			return (free(line), close(fd), NULL);
 		map[lines++] = line;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	if (validate_map(map))

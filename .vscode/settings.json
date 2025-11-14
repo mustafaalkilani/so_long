@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "libft.h": "c",
+        "so_long.h": "c",
+        "stdlib.h": "c",
+        "map.h": "c"
+    }
+}

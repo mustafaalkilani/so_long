@@ -14,7 +14,6 @@
 #include "../include/game.h"
 #include "../include/so_long.h"
 #include "../libft/libft.h"
-#include <stdlib.h>
 
 static void	get_map_dimensions(char **map, int *width, int *height)
 {
@@ -79,35 +78,22 @@ static int	count_collectibles(char **map)
 static int	load_images(t_game *game)
 {
 	game->wall.img = mlx_xpm_file_to_image(game->mlx,
-											"textures/wall.xpm",
-											&game->wall.width,
-											&game->wall.height);
-	if (!game->wall.img)
-		return (ft_printf("Error: failed to load wall.xpm\n"), 0);
+			"textures/wall.xpm", &game->wall.width, &game->wall.height);
 	game->floor.img = mlx_xpm_file_to_image(game->mlx,
-											"textures/floor.xpm",
-											&game->floor.width,
-											&game->floor.height);
-	if (!game->floor.img)
-		return (ft_printf("Error: failed to load floor.xpm\n"), 0);
+			"textures/floor.xpm", &game->floor.width, &game->floor.height);
 	game->player.img = mlx_xpm_file_to_image(game->mlx,
-												"textures/player.xpm",
-												&game->player.width,
-												&game->player.height);
-	if (!game->player.img)
-		return (ft_printf("Error: failed to load player.xpm\n"), 0);
+			"textures/player.xpm", &game->player.width, &game->player.height);
 	game->collectible.img = mlx_xpm_file_to_image(game->mlx,
-													"textures/collectible.xpm",
-													&game->collectible.width,
-													&game->collectible.height);
-	if (!game->collectible.img)
-		return (ft_printf("Error: failed to load collectible.xpm\n"), 0);
+			"textures/collectible.xpm", &game->collectible.width,
+			&game->collectible.height);
 	game->exit.img = mlx_xpm_file_to_image(game->mlx,
-											"textures/exit.xpm",
-											&game->exit.width,
-											&game->exit.height);
-	if (!game->exit.img)
-		return (ft_printf("Error: failed to load exit.xpm\n"), 0);
+			"textures/exit.xpm", &game->exit.width, &game->exit.height);
+	if (!game->wall.img || !game->floor.img || !game->player.img
+		|| !game->collectible.img || !game->exit.img)
+	{
+		ft_printf("Error: failed to load textures\n");
+		return (0);
+	}
 	return (1);
 }
 
@@ -119,7 +105,7 @@ int	init_game(t_game *game, char **map)
 	if (!game->mlx)
 		return (0);
 	game->win = mlx_new_window(game->mlx, game->map_width * TILE_SIZE,
-			game->map_height * TILE_SIZE, "so_long");
+			game->map_height * TILE_SIZE, "Mustafa's So Long Game");
 	if (!game->win)
 		return (0);
 	if (!load_images(game))

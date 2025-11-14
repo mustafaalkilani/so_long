@@ -13,7 +13,6 @@
 #include "../ft_printf/ft_printf.h"
 #include "../include/game.h"
 #include "../include/so_long.h"
-#include <stdlib.h>
 
 static int	can_move(t_game *game, int new_x, int new_y)
 {
