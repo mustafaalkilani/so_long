@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "libft.h": "c",
+        "algorithm": "c",
+        "format": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "sstream": "c",
+        "ratio": "c",
+        "new": "c",
+        "stdint.h": "c"
+    }
+}

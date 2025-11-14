@@ -1,0 +1,29 @@
+NAME        = libft.a
+
+SRC         = $(wildcard ft_*.c)
+OBJ         = $(SRC:.c=.o)
+
+CC          = gcc
+CFLAGS      = -Wall -Wextra -Werror -I .
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
+
+%.o: %.c libft.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+bonus:
+	@echo "No bonus implemented."
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME) libft.so
+
+re: fclean all
+
+so: $(OBJ)
+	$(CC) -nostartfiles -shared -o libft.so $(OBJ)
